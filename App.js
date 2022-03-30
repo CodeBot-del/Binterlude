@@ -15,7 +15,7 @@ export default function App() {
   // </AudioProvider>
   // );
 
-  return <View>
+  return <View style={{marginTop: 50}}>
     <AudioListItem />
   </View>
 }

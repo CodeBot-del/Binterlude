@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, Dimensions } from 'react-native';
 import React from 'react';
 import { Entypo } from '@expo/vector-icons';
 import color from '../misc/color';
@@ -22,10 +22,15 @@ const AudioListItem = () => {
       </View>
     </View>
   )
-}
+};
 
+const {width} = Dimensions.get('window')
 const styles = StyleSheet.create({
-    container: {}
+    container: {
+        flexDirection: 'row',
+        alignSelf: 'center',
+        width: width - 80
+    }
 })
 
 export default AudioListItem;
