@@ -1,5 +1,7 @@
 import { View, Text, StyleSheet } from 'react-native'
-import React from 'react'
+import React from 'react';
+import { Entypo } from '@expo/vector-icons';
+import color from '../misc/color';
 
 const AudioListItem = () => {
   return (
@@ -7,13 +9,17 @@ const AudioListItem = () => {
       <View style={styles.leftContainer}> 
 
             <View style={styles.thumbnail}>
-                <Text>A</Text>
+                <Text style={styles.thumbnailText}>A</Text>
             </View>
-
+            <View style={styles.titleContainer}>
+                <Text style={styles.title}>Title</Text>
+            </View>
 
       </View>
 
-      <View style={styles.rightContainer}> </View>
+      <View style={styles.rightContainer}> 
+        <Entypo name="dots-three-vertical" size={24} color={color.FONT_MEDIUM} />
+      </View>
     </View>
   )
 }
