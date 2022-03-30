@@ -34,6 +34,10 @@ const styles = StyleSheet.create({
     leftContainer: {
         flexDirection: 'row',
         alignItems: 'center',
+        flex: 1,
+    },
+    rightContainer: { 
+        flexBasis: 50,
     }
 })
 
