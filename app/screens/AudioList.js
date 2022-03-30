@@ -1,20 +1,22 @@
-import React from 'react';
-import {View, StyleSheet, Text} from 'react-native';
+import { StyleSheet, Text, View } from 'react-native'
+import React, { Component } from 'react'
 
-const AudioList = () => {
-    return(
+export class AudioList extends Component { 
+render() {
+    return (
         <View style={styles.container}>
-            <Text>Audio List</Text>
+            <Text>AudioList</Text>
         </View>
-    )
+    );
+}
 }
 
 const styles = StyleSheet.create({
-    container:{
+    container: {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-    }
-})
+    },
+});
 
-export default AudioList;
+export default AudioList
