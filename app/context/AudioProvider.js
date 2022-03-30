@@ -1,6 +1,7 @@
 import { Text, View, Alert } from 'react-native'
 import React, { Component, createContext } from 'react'
 import * as MediaLibrary from 'expo-media-library';
+import {DataProvider} from 'recyclerlistview';
 
 export const AudioContext = createContext();
 export class AudioProvider extends Component {
@@ -9,7 +10,8 @@ export class AudioProvider extends Component {
         super(props);
         this.state = {
             audioFiles: [],
-            permissionError: false
+            permissionError: false,
+            dataProvider: new DataProvider((r1, r2) => r1 !== r2)
         }
     }
 
@@ -25,6 +27,7 @@ export class AudioProvider extends Component {
     }
 
     getAudioFiles = async () => {
+        const {dataProvider, audioFiles} = this.state
         let media = await MediaLibrary.getAssetsAsync({
             mediaType: 'audio',
 
@@ -34,7 +37,9 @@ export class AudioProvider extends Component {
             first: media.totalCount
 
         });
-        this.setState({...this.state, audioFiles: media.assets})
+        this.setState({...this.state, dataProvider: dataProvider.cloneWithRows([...audioFiles, ...media.assets]),
+             audioFiles: [...audioFiles, ...media.assets],
+            });
         
     }
 
@@ -50,6 +55,11 @@ export class AudioProvider extends Component {
         //    we want to get all the audio files
         this.getAudioFiles()
        }
+
+       if(!permission.canAskAgain && !permission.granted){
+        this.setState({...this.state, permissionError: true})
+       }
+
        if(!permission.granted && permission.canAskAgain){
          const {status, canAskAgain} =  await MediaLibrary.requestPermissionsAsync();
         //  in case user denies permission
@@ -73,14 +83,17 @@ export class AudioProvider extends Component {
         this.getPermission()
     }
   render() {
-    if(this.state.permissionError) return <View style={{
+    const {audioFiles, dataProvider, permissionError} = this.state
+    if(permissionError)
+     return 
+     <View style={{
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
     }}>
         <Text style={{fontSize: 25, textAlign: 'center', color: 'red'}}>It looks like you haven't allowed permissions.</Text>
     </View>
-    return <AudioContext.Provider value={{audioFiles: this.state.audioFiles}}>
+    return <AudioContext.Provider value={{audioFiles, dataProvider}}>
         {this.props.children}
     </AudioContext.Provider>
   }
