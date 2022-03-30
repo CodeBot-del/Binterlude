@@ -6,7 +6,10 @@ export const AudioContext = createContext();
 export class AudioProvider extends Component {
     
     constructor(props){
-        super(props)
+        super(props);
+        this.state = {
+            audioFiles: []
+        }
     }
 
     permissionAlert = () => {
@@ -21,10 +24,17 @@ export class AudioProvider extends Component {
     }
 
     getAudioFiles = async () => {
-        const media = await MediaLibrary.getAssetsAsync({
-            mediaType: 'audio'
-        })
-        console.log(media)
+        let media = await MediaLibrary.getAssetsAsync({
+            mediaType: 'audio',
+
+        });
+        media = await MediaLibrary.getAssetsAsync({
+            mediaType: 'audio',
+            first: media.totalCount
+
+        });
+        this.setState({...this.state, audioFiles: media.assets})
+        
     }
 
     getPermission = async () => {
@@ -62,7 +72,7 @@ export class AudioProvider extends Component {
         this.getPermission()
     }
   render() {
-    return <AudioContext.Provider value={{}}>
+    return <AudioContext.Provider value={{audioFiles: this.state.audioFiles}}>
         {this.props.children}
     </AudioContext.Provider>
   }
