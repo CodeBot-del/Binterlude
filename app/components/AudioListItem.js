@@ -30,6 +30,10 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignSelf: 'center',
         width: width - 80
+    },
+    leftContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
     }
 })
 
