@@ -55,6 +55,7 @@ export class AudioList extends Component {
                         />
                         <OptionModal 
                         onPlayPress={() => console.log('Playing audio')}
+                        onPlayListPress={() => console.log('Added to playlist')}
                         currentItem={this.currentItem}
                         onClose={() => this.setState({ ...this.state, optionModalVisible: false })
                     }
