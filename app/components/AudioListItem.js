@@ -12,7 +12,7 @@ const AudioListItem = () => {
                 <Text style={styles.thumbnailText}>A</Text>
             </View>
             <View style={styles.titleContainer}>
-                <Text style={styles.title}>Title</Text>
+                <Text numberOfLines={1} style={styles.title}>This will be some long title, some more!</Text>
             </View>
 
       </View>
@@ -38,7 +38,31 @@ const styles = StyleSheet.create({
     },
     rightContainer: { 
         flexBasis: 50,
-    }
+        height: 50,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    thumbnail: {
+        height: 50,
+        flexBasis: 50,
+        backgroundColor: color.FONT_LIGHT,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 25
+    },
+    thumbnailText: {
+        fontSize: 22,
+        fontWeight: 'bold',
+        color: color.FONT,
+    },
+    titleContainer: {
+        width: width - 180,
+        paddingLeft: 10,
+    },
+    title: {
+        fontSize: 16,
+        color: color.FONT,
+    },
 })
 
 export default AudioListItem;
