@@ -9,6 +9,14 @@ import OptionModal from '../components/OptionModal';
 export class AudioList extends Component {
     static contextType = AudioContext;
 
+    constructor(props){
+        super(props);
+        this.state = {
+            optionModalVisible: false
+        }
+
+    }
+
     layoutProvider = new LayoutProvider(
         i => 'audio',
         (type, dim) => {
@@ -26,7 +34,7 @@ export class AudioList extends Component {
 
     rowRenderer = (type, item) => {
         return <AudioListItem title={item.filename} duration={item.duration} onOptionPress={() => {
-            console.log('opening options');
+            this.setState({...this.state, optionModalVisible: true});
         }}/>;
     }
 
@@ -39,7 +47,8 @@ export class AudioList extends Component {
                             layoutProvider={this.layoutProvider}
                             rowRenderer={this.rowRenderer}
                         />
-                        <OptionModal visible={true}/>
+                        <OptionModal onClose={() => this.setState({...this.state, optionModalVisible: false})} 
+                        visible={this.state.optionModalVisible}/>
                     </Screen>
 
                 );
