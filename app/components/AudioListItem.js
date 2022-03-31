@@ -5,6 +5,7 @@ import color from '../misc/color';
 
 const AudioListItem = () => {
   return (
+      <>
     <View style={styles.container}>
       <View style={styles.leftContainer}> 
 
@@ -13,6 +14,7 @@ const AudioListItem = () => {
             </View>
             <View style={styles.titleContainer}>
                 <Text numberOfLines={1} style={styles.title}>This will be some long title, some more!</Text>
+                <Text style={styles.timeText}>02:59</Text>
             </View>
 
       </View>
@@ -21,6 +23,8 @@ const AudioListItem = () => {
         <Entypo name="dots-three-vertical" size={24} color={color.FONT_MEDIUM} />
       </View>
     </View>
+    <View style={styles.separator}/>
+    </>
   )
 };
 
@@ -63,6 +67,18 @@ const styles = StyleSheet.create({
         fontSize: 16,
         color: color.FONT,
     },
+    separator: {
+        width: width - 80,
+        backgroundColor: '#333',
+        opacity: 0.3,
+        height: 0.5,
+        alignSelf: 'center',
+        marginTop: 10,
+    },
+    timeText:{
+        fontSize: 14,
+        color: color.FONT_LIGHT,
+    }
 })
 
 export default AudioListItem;
