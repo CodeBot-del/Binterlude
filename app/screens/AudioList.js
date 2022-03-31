@@ -24,7 +24,9 @@ export class AudioList extends Component {
         })
 
     rowRenderer = (type, item) => {
-        return <AudioListItem title={item.filename} duration={item.duration}/>
+        return <AudioListItem title={item.filename} duration={item.duration} onOptionPress={() => {
+            console.log('opening options');
+        }}/>;
     }
 
     render() {

@@ -27,7 +27,7 @@ const convertTime = minutes => {
 
 
 
-const AudioListItem = ({ title, duration }) => {
+const AudioListItem = ({ title, duration, onOptionPress }) => {
     return (
         <>
             <View style={styles.container}>
@@ -44,7 +44,9 @@ const AudioListItem = ({ title, duration }) => {
                 </View>
 
                 <View style={styles.rightContainer}>
-                    <Entypo name="dots-three-vertical" size={20} color={color.FONT_MEDIUM} />
+                    <Entypo 
+                    onPress={onOptionPress}
+                    name="dots-three-vertical" size={20} color={color.FONT_MEDIUM} />
                 </View>
             </View>
             <View style={styles.separator} />
