@@ -2,15 +2,13 @@ import { Text, View, StyleSheet, Modal, StatusBar, TouchableWithoutFeedback } fr
 import React from 'react'
 import color from '../misc/color';
 
-const OptionModal = ({visible, onClose}) => {
+const OptionModal = ({visible, currentItem, onClose}) => {
+    const {filename} = currentItem;
     return <>
     <StatusBar/>
      <Modal animationType='slide' transparent visible={visible}>
         <View style={styles.modal}>
-            <Text style={styles.title} numberOfLines={2}>
-            Dynamic title of our audio
-            Dynamic title of our audioDynamic title of our audioDynamic title of our audio
-            Dynamic title of our audio</Text>
+            <Text style={styles.title} numberOfLines={2}>{filename}</Text>
             <View style={styles.optionContainer}>
                 <Text style={styles.option}>Play</Text>
                 <Text style={styles.option}>Add to Playlist</Text>

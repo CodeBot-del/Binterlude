@@ -9,11 +9,13 @@ import OptionModal from '../components/OptionModal';
 export class AudioList extends Component {
     static contextType = AudioContext;
 
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {
             optionModalVisible: false
-        }
+        };
+
+        this.currentItem = {}
 
     }
 
@@ -33,9 +35,13 @@ export class AudioList extends Component {
         })
 
     rowRenderer = (type, item) => {
-        return <AudioListItem title={item.filename} duration={item.duration} onOptionPress={() => {
-            this.setState({...this.state, optionModalVisible: true});
-        }}/>;
+        return <AudioListItem 
+        title={item.filename} 
+        duration={item.duration} 
+        onOptionPress={() => {
+            this.currentItem = item;
+            this.setState({ ...this.state, optionModalVisible: true });
+        }} />;
     }
 
     render() {
@@ -47,8 +53,11 @@ export class AudioList extends Component {
                             layoutProvider={this.layoutProvider}
                             rowRenderer={this.rowRenderer}
                         />
-                        <OptionModal onClose={() => this.setState({...this.state, optionModalVisible: false})} 
-                        visible={this.state.optionModalVisible}/>
+                        <OptionModal 
+                        currentItem={this.currentItem}
+                        onClose={() => this.setState({ ...this.state, optionModalVisible: false })
+                    }
+                            visible={this.state.optionModalVisible} />
                     </Screen>
 
                 );
