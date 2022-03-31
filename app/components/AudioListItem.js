@@ -3,7 +3,7 @@ import React from 'react';
 import { Entypo } from '@expo/vector-icons';
 import color from '../misc/color';
 
-const AudioListItem = () => {
+const AudioListItem = ({title, duration}) => {
   return (
       <>
     <View style={styles.container}>
@@ -13,14 +13,14 @@ const AudioListItem = () => {
                 <Text style={styles.thumbnailText}>A</Text>
             </View>
             <View style={styles.titleContainer}>
-                <Text numberOfLines={1} style={styles.title}>This will be some long title, some more!</Text>
-                <Text style={styles.timeText}>02:59</Text>
+                <Text numberOfLines={1} style={styles.title}>{title}</Text>
+                <Text style={styles.timeText}>{duration}</Text>
             </View>
 
       </View>
 
       <View style={styles.rightContainer}> 
-        <Entypo name="dots-three-vertical" size={24} color={color.FONT_MEDIUM} />
+        <Entypo name="dots-three-vertical" size={20} color={color.FONT_MEDIUM} />
       </View>
     </View>
     <View style={styles.separator}/>

@@ -7,17 +7,15 @@ import AppNavigator from './app/navigation/AppNavigator';
 
 
 export default function App() {
-  // return (
-  //   <AudioProvider>
-  // <NavigationContainer>
-  //   <AppNavigator />
-  // </NavigationContainer>
-  // </AudioProvider>
-  // );
+  return (
+    <AudioProvider>
+  <NavigationContainer>
+    <AppNavigator />
+  </NavigationContainer>
+  </AudioProvider>
+  );
 
-  return <View style={{marginTop: 50}}>
-    <AudioListItem />
-  </View>
+
 }
 
 
