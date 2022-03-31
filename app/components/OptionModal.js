@@ -2,7 +2,7 @@ import { Text, View, StyleSheet, Modal, StatusBar, TouchableWithoutFeedback } fr
 import React from 'react'
 import color from '../misc/color';
 
-const OptionModal = ({visible, currentItem, onClose}) => {
+const OptionModal = ({visible, currentItem, onClose, onPlayPress, onPlayListPress}) => {
     const {filename} = currentItem;
     return <>
     <StatusBar/>
@@ -10,8 +10,13 @@ const OptionModal = ({visible, currentItem, onClose}) => {
         <View style={styles.modal}>
             <Text style={styles.title} numberOfLines={2}>{filename}</Text>
             <View style={styles.optionContainer}>
-                <Text style={styles.option}>Play</Text>
-                <Text style={styles.option}>Add to Playlist</Text>
+                <TouchableWithoutFeedback onPress={onPlayPress}>
+                    <Text style={styles.option}>Play</Text>
+                </TouchableWithoutFeedback>
+                
+                <TouchableWithoutFeedback onPress={onPlayListPress}>
+                    <Text style={styles.option}>Add to Playlist</Text>
+                </TouchableWithoutFeedback>
             </View>
         </View>
         <TouchableWithoutFeedback onPress={onClose}>
