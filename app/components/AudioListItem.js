@@ -3,32 +3,56 @@ import React from 'react';
 import { Entypo } from '@expo/vector-icons';
 import color from '../misc/color';
 
-const AudioListItem = ({title, duration}) => {
-  return (
-      <>
-    <View style={styles.container}>
-      <View style={styles.leftContainer}> 
+const getThumbnailText = (filename) => filename[0]
 
-            <View style={styles.thumbnail}>
-                <Text style={styles.thumbnailText}>A</Text>
-            </View>
-            <View style={styles.titleContainer}>
-                <Text numberOfLines={1} style={styles.title}>{title}</Text>
-                <Text style={styles.timeText}>{duration}</Text>
-            </View>
+const convertTime = minutes => {
+    if (minutes) {
+        const hrs = minutes / 60;
+        const minute = hrs.toString().split('.')[0];
+        const percent = parseInt(hrs.toString().split('.')[1].slice(0, 2));
+        const sec = Math.ceil((60 * percent) / 100);
 
-      </View>
-
-      <View style={styles.rightContainer}> 
-        <Entypo name="dots-three-vertical" size={20} color={color.FONT_MEDIUM} />
-      </View>
-    </View>
-    <View style={styles.separator}/>
-    </>
-  )
+        if (parseInt(minute) < 10 && sec < 10) {
+            return `0${minute}:0${sec}`;
+        }
+        if (parseInt(minute) < 10) {
+            return `0${minute}:${sec}`;
+        }
+        if (sec < 10) { 
+            return `${minute}:0${sec}`;
+        }
+        return `${minute}:${sec}`;
+    }
 };
 
-const {width} = Dimensions.get('window')
+
+
+const AudioListItem = ({ title, duration }) => {
+    return (
+        <>
+            <View style={styles.container}>
+                <View style={styles.leftContainer}>
+
+                    <View style={styles.thumbnail}>
+                        <Text style={styles.thumbnailText}>{getThumbnailText(title)}</Text>
+                    </View>
+                    <View style={styles.titleContainer}>
+                        <Text numberOfLines={1} style={styles.title}>{title}</Text>
+                        <Text style={styles.timeText}>{convertTime(duration)}</Text>
+                    </View>
+
+                </View>
+
+                <View style={styles.rightContainer}>
+                    <Entypo name="dots-three-vertical" size={20} color={color.FONT_MEDIUM} />
+                </View>
+            </View>
+            <View style={styles.separator} />
+        </>
+    )
+};
+
+const { width } = Dimensions.get('window')
 const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
@@ -40,7 +64,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         flex: 1,
     },
-    rightContainer: { 
+    rightContainer: {
         flexBasis: 50,
         height: 50,
         alignItems: 'center',
@@ -75,7 +99,7 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         marginTop: 10,
     },
-    timeText:{
+    timeText: {
         fontSize: 14,
         color: color.FONT_LIGHT,
     }

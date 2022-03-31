@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import { AudioContext } from '../context/AudioProvider';
 import { RecyclerListView, LayoutProvider } from 'recyclerlistview';
 import AudioListItem from '../components/AudioListItem';
+import Screen from '../components/Screen';
 
 export class AudioList extends Component {
     static contextType = AudioContext;
@@ -23,19 +24,19 @@ export class AudioList extends Component {
         })
 
     rowRenderer = (type, item) => {
-        return <AudioListItem title={item.title} duration={item.duration}/>
+        return <AudioListItem title={item.filename} duration={item.duration}/>
     }
 
     render() {
         return (<AudioContext.Consumer>
             {({ dataProvider }) => {
                 return (
-                    <View style={{ flex: 1 }}>
+                    <Screen>
                         <RecyclerListView dataProvider={dataProvider}
                             layoutProvider={this.layoutProvider}
                             rowRenderer={this.rowRenderer}
                         />
-                    </View>
+                    </Screen>
 
                 );
             }}
